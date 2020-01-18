@@ -3,8 +3,10 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.sqrt
+import kotlin.math.*
 
 /**
  * Пример
@@ -136,7 +138,23 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    return when {
+        ((acos((sqr(a) + sqr(c) - sqr(b)) / (2 * a * c)) / PI * 180.0) < 90.0) &&
+                ((acos((sqr(a) + sqr(b) - sqr(c)) / (2 * a * b)) / PI * 180) < 90.0) &&
+                ((acos((sqr(b) + sqr(c) - sqr(a)) / (2 * b * c)) / PI * 180) < 90.0) -> 0
+
+        ((acos((sqr(a) + sqr(c) - sqr(b)) / (2 * a * c)) / PI * 180.0) == 90.0) ||
+                ((acos((sqr(a) + sqr(b) - sqr(c)) / (2 * a * b)) / PI * 180) == 90.0) ||
+                ((acos((sqr(b) + sqr(c) - sqr(a)) / (2 * b * c)) / PI * 180) == 90.0) -> 1
+
+        ((acos((sqr(a) + sqr(c) - sqr(b)) / (2 * a * c)) / PI * 180.0) > 90.0) ||
+                ((acos((sqr(a) + sqr(b) - sqr(c)) / (2 * a * b)) / PI * 180) > 90.0) ||
+                ((acos((sqr(b) + sqr(c) - sqr(a)) / (2 * b * c)) / PI * 180) > 90.0) -> 2
+
+        else -> -1
+    }
+}
 
 /**
  * Средняя
@@ -148,12 +166,12 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     return when {
-        ((a==c) && (b==d)) -> d - c
-        (b==c) -> 0
-        ((a<c) && (b<d) && (c<b)) -> b - c
-        ((a>c) && (b>d) && (a<d)) -> d - a
-        ((a<c) && (b>d)) -> d - c
-        ((c<a) && (d>b)) -> b - a
+        ((a == c) && (b == d)) -> d - c
+        (b == c) -> 0
+        ((a < c) && (b < d) && (c < b)) -> b - c
+        ((a > c) && (b > d) && (a < d)) -> d - a
+        ((a < c) && (b > d)) -> d - c
+        ((c < a) && (d > b)) -> b - a
         else -> -1
     }
 }
