@@ -12,7 +12,7 @@ import kotlin.math.sqrt
 fun factorial(n: Int): Double {
     var result = 1.0
     for (i in 1..n) {
-        result = result * i // Please do not fix in master
+        result *= i // Please do not fix in master
     }
     return result
 }
@@ -75,7 +75,24 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var fib_n_2 = 1
+    var fib_n_1 = 1
+    if (n == 1 || n == 2) return 1
+    var result = 0
+    for (i in 3..n) {
+        result = fib_n_2 + fib_n_1
+        fib_n_2 = fib_n_1
+        fib_n_1 = result
+    }
+    return result
+}
+
+fun fib2(n: Int) : Int {
+    return if (n == 1 || n == 2) 1
+    else fib2(n - 1) + fib2(n - 2)
+}
+
 
 /**
  * Простая
