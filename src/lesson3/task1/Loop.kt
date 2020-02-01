@@ -2,8 +2,7 @@
 
 package lesson3.task1
 
-import kotlin.math.min
-import kotlin.math.sqrt
+import kotlin.math.*
 
 /**
  * Пример
@@ -68,7 +67,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var result = 0
+    var tmp = n
+    if (tmp == 0) return 1
+    while (tmp != 0) {
+        tmp /= 10
+        result++
+    }
+    return result
+}
 
 /**
  * Простая
@@ -192,7 +200,18 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    val zCount = digitNumber(n)
+    val des = 10
+    var stOst = n
+    var reverseRes = 0
+    for (i in 0..zCount) {
+        var mn = (des.toDouble().pow(zCount.toDouble() - (i + 1).toDouble())).toInt()
+        reverseRes += (stOst - stOst / 10 * 10) * mn
+        stOst /= 10
+    }
+    return reverseRes
+}
 
 /**
  * Средняя
@@ -203,7 +222,17 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var zCount = digitNumber(n) / 2
+    var revertRes = revert(n)
+    var tmp = n
+    for (i in 0..zCount) {
+        if ((tmp - tmp / 10 * 10) != (revertRes - revertRes / 10 * 10)) return false
+        tmp /= 10
+        revertRes /= 10
+    }
+    return true
+}
 
 /**
  * Средняя
