@@ -109,7 +109,14 @@ fun fib2(n: Int): Int {
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var k = min(m, n)
+    while (k <= m * n) {
+        if ((k % m == 0) && (k % n == 0)) break
+        k++
+    }
+    return k
+}
 
 /**
  * Простая
@@ -180,7 +187,18 @@ fun collatzSteps(x: Int): Int = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    var i = 1
+    var j = 2
+    var result = 0.0
+    var x1 = x % (2 * PI)
+    while (abs(x1.pow(i) / factorial(i) * ((-1).toDouble()).pow(j)) >= abs(eps)) {
+        result += x1.pow(i) / factorial(i) * ((-1).toDouble()).pow(j)
+        i += 2
+        j++
+    }
+    return result
+}
 
 /**
  * Средняя
