@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
 import kotlin.math.*
 
 /**
@@ -260,7 +261,21 @@ fun isPalindrome(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var digit = 0
+    var digitNext = 0
+    var i = 1
+    var tmp = n
+    if (n / 10 == 0) return false
+    while (i < digitNumber(n)) {
+        digit = tmp % 10
+        tmp /= 10
+        digitNext = tmp % 10
+        if (digit != digitNext) return true
+        i++
+    }
+    return false
+}
 
 /**
  * Сложная
@@ -271,7 +286,15 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var k = 0
+    var x = 1
+    while (k < n) {
+        k += digitNumber(sqr(x))
+        x++
+    }
+    return sqr(x - 1) / (10.0.pow(k - n)).toInt() % 10
+}
 
 /**
  * Сложная
