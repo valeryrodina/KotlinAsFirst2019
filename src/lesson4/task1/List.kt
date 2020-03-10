@@ -307,7 +307,13 @@ fun convertToString(n: Int, base: Int): String {
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var result = 0
+    for (i in 0 until digits.size) {
+        result += digits[digits.size - i - 1] * (base.toDouble()).pow(i).toInt()
+    }
+    return result
+}
 
 /**
  * Сложная
@@ -321,7 +327,49 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val chars = charArrayOf(
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z'
+    )
+    var result = 0
+    var newList = str.toList()
+    var intList = newList.map(fun(i: Char): Int {
+        return if (i.toInt() in '0'.toInt()..'9'.toInt()) {
+            i.toInt() - '0'.toInt()
+        } else {
+            i.toInt() - 'a'.toInt() + 10
+        }
+    })
+    for (i in 0 until intList.size) {
+        result += intList[intList.size - i - 1] * (base.toDouble()).pow(i).toInt()
+    }
+    return result
+}
 
 /**
  * Сложная
@@ -331,7 +379,18 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    var list: MutableList<Int> = mutableListOf()
+    var tmp = n
+    var i = 0
+    while (tmp != 0) {
+        list.add((tmp % 10) * (10.toDouble().pow(i).toInt()))
+        tmp /= 10
+        i++
+    }
+
+
+}
 
 /**
  * Очень сложная
