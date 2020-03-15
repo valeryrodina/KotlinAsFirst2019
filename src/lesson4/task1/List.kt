@@ -381,14 +381,45 @@ fun decimalFromString(str: String, base: Int): Int {
  */
 fun roman(n: Int): String {
     var list: MutableList<Int> = mutableListOf()
+    val rimList: List<String> = listOf("I", "V", "X", "L", "C", "D", "M")
+    var resultList: MutableList<String> = mutableListOf()
     var tmp = n
+    var z: Int
     var i = 0
     while (tmp != 0) {
         list.add((tmp % 10) * (10.toDouble().pow(i).toInt()))
         tmp /= 10
         i++
     }
-
+    for (i in 0 until list.size) {
+        z = list[i] / (10.toDouble().pow(i).toInt())
+        var str: String = ""
+        when (z) {
+            in 1..3 -> {
+                for (j in 0 until z) {
+                    str += rimList[i * 2]
+                }
+            }
+            4 -> {
+                str = rimList[i * 2] + rimList[i * 2 + 1]
+            }
+            5 -> resultList.add(rimList[i * 2 + 1])
+            in 6..8 -> {
+                str = rimList[i * 2 + 1]
+                for (k in 0 until z - 5) {
+                    str += rimList[i * 2]
+                }
+            }
+            9 -> {
+                str = rimList[i * 2] + rimList[i * 2 + 2]
+            }
+            else -> {
+            }
+        }
+        resultList.add(str)
+    }
+    resultList.reverse()
+    return resultList.joinToString(separator = "")
 
 }
 
