@@ -292,7 +292,17 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+fun hasAnagrams(words: List<String>): Boolean {
+    for (i in words.indices) {
+        val reversedWord = words[i].reversed()
+        for (j in (i + 1) until words.size) {
+            if (reversedWord.length == words[j].length) {
+                if (reversedWord == words[j]) return true
+            }
+        }
+    }
+    return false
+}
 
 /**
  * Сложная
